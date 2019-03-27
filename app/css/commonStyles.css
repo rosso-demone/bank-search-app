@@ -1,6 +1,12 @@
+.bankDetailsColumn {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #d3d3d3;
+}
 .bankDetailsRow {
   height: 52px;
   overflow: hidden;
+  padding-right: 8px;
 }
 .bankDetailsRow.header {
   padding-top: 8px;

@@ -32,7 +32,7 @@ div(ng-controller="homePageController as homePageCtrl")
                         .bankDetailsRow.header.flex IFSC
                     md-virtual-repeat-container(style="height: 480px; width: 100%;")
                         div(md-virtual-repeat='bankObj in homePageCtrl.bankDetailsList | filter:homePageCtrl.searchText', flex='', style="height: 60px;")
-                            div.layout-row(style="padding-top:4px; padding-bottom:4px")
+                            div.layout-row.bankDetailsColumn
                                 .bankDetailsRow.flex(title="{{bankObj.bank_name}}") {{bankObj.bank_name}}
                                 .bankDetailsRow.flex(title="{{bankObj.address}}") {{bankObj.address}}
                                 .bankDetailsRow.flex(title="{{bankObj.branch}}") {{bankObj.branch}}
