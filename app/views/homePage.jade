@@ -25,7 +25,7 @@ div(ng-controller="homePageController as homePageCtrl")
                         span(style="padding-right:8px;") List of banks in {{homePageCtrl.selectedCity}}
                         span(ng-if="homePageCtrl.searchText") (Filtered with query : {{homePageCtrl.searchText}})
 
-                    div.layout-row
+                    div.layout-row(style="background-color: lightgray;")
                         .bankDetailsRow.header.flex Bank Name
                         .bankDetailsRow.header.flex Address
                         .bankDetailsRow.header.flex Branch
