@@ -1,2 +1,70 @@
-div(ng-controller='homePageController as homePageCtrl')
-    | This is a test {{parentCtrl.name}}
+div(ng-controller="homePageController as homePageCtrl")
+    md-toolbar(md-scroll-shrink='')
+        .md-toolbar-tools Search Banks
+    md-content(style="padding: 16px;")
+        div.layout-row.layout-align-start-start
+            div.flex
+                md-input-container
+                    label City
+                    md-select(ng-model="homePageCtrl.selectedCity", placeholder="Select city", ng-change="homePageCtrl.onChangeCity()", ng-disabled="homePageCtrl.bankDetailsLoading === true")
+                        md-option(ng-repeat="city in homePageCtrl.cityList", ng-value="city") {{city}}
+
+            div.flex
+                md-input-container
+                    label Search
+                    input(ng-model='homePageCtrl.searchText', ng-disabled="homePageCtrl.bankDetailsLoading === true")
+        
+        div(ng-if="homePageCtrl.selectedCity")
+            div(ng-if="homePageCtrl.bankDetailsLoading === true", layout='row', layout-sm='column', layout-align='space-around')
+                md-progress-circular(md-mode='indeterminate')
+            div(ng-if="homePageCtrl.bankDetailsLoading !== true")
+                section(ng-if="homePageCtrl.bankDetailsList.length === 0")
+                    h4 No banks found in {{homePageCtrl.selectedCity}}
+                section(ng-if="homePageCtrl.bankDetailsList.length > 0")
+                    h4.layout-row(style="padding-bottom:8px;")
+                        span(style="padding-right:8px;") List of banks in {{homePageCtrl.selectedCity}}
+                        span(ng-if="homePageCtrl.searchText") (Filtered with query : {{homePageCtrl.searchText}})
+
+                    div.layout-row
+                        .bankDetailsRow.header.flex Bank Name
+                        .bankDetailsRow.header.flex Address
+                        .bankDetailsRow.header.flex Branch
+                        .bankDetailsRow.header.flex IFSC
+                    md-virtual-repeat-container(style="height: 480px; width: 100%;")
+                        div(md-virtual-repeat='bankObj in homePageCtrl.bankDetailsList | filter:homePageCtrl.searchText', flex='', style="height: 60px;")
+                            div.layout-row(style="padding-top:4px; padding-bottom:4px")
+                                .bankDetailsRow.flex(title="{{bankObj.bank_name}}") {{bankObj.bank_name}}
+                                .bankDetailsRow.flex(title="{{bankObj.address}}") {{bankObj.address}}
+                                .bankDetailsRow.flex(title="{{bankObj.branch}}") {{bankObj.branch}}
+                                .bankDetailsRow.flex(title="{{bankObj.ifsc}}") {{bankObj.ifsc}}
+                    //- md-list(layout-padding='')
+                    //-     md-list-item.md-3-line(ng-repeat='bankObj in homePageCtrl.bankDetailsList | filter:homePageCtrl.searchText') {{bankObj}}
+                    //- img.md-avatar(ng-src='{{message.face}}', alt='{{message.who}}')
+                    //- .md-list-item-text
+                    //- h3 {{message.what}}
+                    //- h4 {{message.who}}
+                    //- p
+                    //-     | {{message.notes}}
+//- div(ng-controller="homePageController as homePageCtrl", style="padding: 24px")
+    h1 Search Banks
+    div.layout-row.layout-align-start-center
+        div.flex
+            md-input-container
+                label City
+                md-select(ng-model="homePageCtrl.selectedCity", placeholder="Select city", ng-change="homePageCtrl.onChangeCity()")
+                    md-option(ng-repeat="city in homePageCtrl.cityList", ng-value="city") {{city}}
+
+        div.flex
+            md-input-container
+                label Search
+                input(ng-model='homePageCtrl.searchText')
+
+    div(ng-if="homePageCtrl.selectedCity")
+        div List of banks in {{homePageCtrl.selectedCity}}
+        div(ng-if="homePageCtrl.bankDetailsLoading === true", layout='row', layout-sm='column', layout-align='space-around')
+            md-progress-circular(md-mode='indeterminate')
+        div(ng-if="homePageCtrl.bankDetailsLoading !== true")
+            div(ng-if="homePageCtrl.bankDetailsList.length === 0")
+                | No banks found
+            div(ng-if="homePageCtrl.bankDetailsList.length > 0", ng-repeat='bankObj in homePageCtrl.bankDetailsList | filter:homePageCtrl.searchText')
+                | {{bankObj}}

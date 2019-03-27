@@ -1,0 +1,12 @@
+.bankDetailsRow {
+  height: 52px;
+  overflow: hidden;
+}
+.bankDetailsRow.header {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 34px;
+  background-color: #d3d3d3;
+  text-transform: uppercase;
+  font-weight: 400;
+}
